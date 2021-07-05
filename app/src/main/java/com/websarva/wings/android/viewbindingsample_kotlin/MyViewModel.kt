@@ -4,16 +4,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MyViewModel: ViewModel() {
+    // privateメンバ
     private val _hello = MutableLiveData<String>().apply {
         MutableLiveData<String>()
     }
 
+    // _helloの初期化
+    init {
+        _hello.value = ""
+    }
+
+    // setter
     fun setText(){
         _hello.postValue("Hello_World!!")
     }
 
-    val hello: MutableLiveData<String> = _hello
-    init {
-        hello.value = ""
+    // getter
+    fun hello(): MutableLiveData<String>{
+        return _hello
     }
 }

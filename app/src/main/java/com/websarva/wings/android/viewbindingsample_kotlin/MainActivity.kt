@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.websarva.wings.android.viewbindingsample_kotlin.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    // viewModelのインスタンス
     private val myViewModel: MyViewModel by lazy {
         ViewModelProvider(this).get(MyViewModel::class.java)
     }
+    // binding
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,10 +20,14 @@ class MainActivity : AppCompatActivity() {
             setContentView(this.root)
         }
 
-        myViewModel.hello.observe(this, {
-            binding.textView.text = myViewModel.hello.value
+        // ViewModel hello()の監視
+        myViewModel.hello().observe(this, {
+            binding.textView.text = myViewModel.hello().value
         })
 
-        myViewModel.setText()
+        // ボタンタップ時の処理
+        binding.button.setOnClickListener {
+            myViewModel.setText()
+        }
     }
 }
